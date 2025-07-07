@@ -1,1 +1,0 @@
-location ==> cd "D:\Vs Code\student-data"
