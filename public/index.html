@@ -11,6 +11,7 @@
     <!-- Header -->
     <div class="position-relative mb-4">
       <h2 class="text-center">Student Management</h2>
+      <h6><span class="text-danger">⚠️ Note:</span> MongoDB has been intentionally paused. Instead, a few student records are provided from a pre-saved "students.json" file. 🔐Credentials (User: admin , Pass: admin123)</h6>
       <button id="loginBtn" class="btn btn-outline-success position-absolute end-0 top-0" onclick="showLogin()">Login</button>
       <button id="logoutBtn" class="btn btn-outline-danger position-absolute end-0 top-0 d-none" onclick="logout()">Logout</button>
     </div>
@@ -31,8 +32,11 @@
 
     <!-- Student Form Section -->
     <div id="studentFormContainer">
+      
       <form id="studentForm">
-        <!-- 📘 Basic -->
+        
+
+        <!-- Basic student details form -->
         <h5 class="mb-3 mt-2">📘 Basic Student Details</h5>
         <div class="row">
           <div class="col-md-4 mb-3"><input type="text" id="name" class="form-control" placeholder="Student Name" required /></div>
@@ -52,7 +56,7 @@
           <div class="col-md-12 mb-3"><input type="text" id="address" class="form-control" placeholder="Student Address" required /></div>
         </div>
 
-        <!-- 🎓 Academic -->
+        <!-- Academic details form -->
         <h5 class="mb-3 mt-2">🎓 Academic Details</h5>
         <div class="row">
           <div class="col-md-4 mb-3"><input type="text" id="class" class="form-control" placeholder="Class/Grade"></div>
@@ -72,7 +76,7 @@
           <div class="col-md-4 mb-3"><input type="text" id="prevSchool" class="form-control" placeholder="Previous School"></div>
         </div>
 
-        <!-- 👨‍👩‍👧 Guardian -->
+        <!-- parents details form -->
         <h5 class="mb-3 mt-2">👨‍👩‍👧 Parent / Guardian Details</h5>
         <div class="row">
           <div class="col-md-4 mb-3"><input type="text" id="father" class="form-control" placeholder="Father's Name"></div>
@@ -81,7 +85,7 @@
           <div class="col-md-4 mb-3"><input type="text" id="guardianContact" class="form-control" placeholder="Guardian Contact"></div>
         </div>
 
-        <!-- 📊 Performance -->
+        <!-- student attendance form -->
         <h5 class="mb-3 mt-2">📊 Attendance & Performance</h5>
         <div class="row">
           <div class="col-md-4 mb-3"><input type="text" id="attendance" class="form-control" placeholder="Attendance Record (Date-wise)"></div>
@@ -98,7 +102,7 @@
       </form>
     </div>
 
-    <!-- Student List -->
+    <!-- Student List / after login-->
     <div id="secureArea" style="display: none;">
       <h4 class="mt-4">📋 Student List</h4>
       <div id="messageBox"></div>
