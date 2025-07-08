@@ -1,75 +1,96 @@
-/* General Body Styling */
 body {
   background-color: #f8f9fa;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Form Headings */
-h2, h4, h5 {
+h4, h5 {
   font-weight: 600;
   color: #343a40;
+  margin-top: 0.6rem;
 }
-
-/* Center alignment for headings */
-h2.text-center {
-  text-align: center;
+h2{
+font-weight: 600;
+  color: #343a40;
+  margin-top: 0.5rem;
   margin-bottom: 1rem;
 }
-
-/* Form Container Padding */
 #studentFormContainer {
-  background-color: #fff;
-  padding: 25px;
+  background-color: #ffffff;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Student List Styling */
 #studentList {
   margin-top: 20px;
 }
-
 #studentList li {
   font-size: 15px;
 }
 
-/* Message Box */
-#messageBox {
-  margin-top: 10px;
-}
-
-/* Modal Styling */
 #loginModal .modal-content {
   border-radius: 8px;
 }
-
 #loginModal input {
   font-size: 14px;
 }
-
 #loginModal h5 {
   font-weight: 500;
 }
-
-/* Login Modal Background */
 #loginModal {
   z-index: 1050;
 }
 
-/* Custom Button Styling */
-.btn-primary, .btn-success {
-  padding: 8px 20px;
+/* Responsive Fields */
+.row > .form-field {
+  margin-bottom: 1rem;
 }
 
-.btn-outline-success, .btn-outline-danger {
-  padding: 6px 14px;
-  font-size: 14px;
-}
-
-/* Responsive Field Spacing */
-@media (max-width: 768px) {
-  .col-md-4 {
+@media (max-width: 576px) {
+  .form-field {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 991px) {
+  .form-field {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .form-field {
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+  }
+}
+
+/* Login/Logout Button Position */
+.button-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@media (max-width: 500px) {
+  .button-container {
+    position: static;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .button-container .btn {
+    flex: 1 1 auto;
+    min-width: 120px;
+  }
+}
+@media (max-width: 500px) {
+  .note-text {
+    display: none !important;
   }
 }
