@@ -6,13 +6,13 @@ body {
 h4, h5 {
   font-weight: 600;
   color: #343a40;
-  margin-top: 0.6rem;
+  margin-top: 1rem;
 }
 h2{
-font-weight: 600;
+  font-weight: 600;
   color: #343a40;
   margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.3rem;
 }
 #studentFormContainer {
   background-color: #ffffff;
@@ -34,14 +34,10 @@ font-weight: 600;
 #loginModal input {
   font-size: 14px;
 }
-#loginModal h5 {
-  font-weight: 500;
-}
 #loginModal {
   z-index: 1050;
 }
 
-/* Responsive Fields */
 .row > .form-field {
   margin-bottom: 1rem;
 }
@@ -50,6 +46,24 @@ font-weight: 600;
   .form-field {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+
+  .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  #studentFormContainer {
+    border-radius: 0;
+  }
+
+  .note-text {
+    display: none !important;
   }
 }
 
@@ -89,8 +103,4 @@ font-weight: 600;
     min-width: 120px;
   }
 }
-@media (max-width: 500px) {
-  .note-text {
-    display: none !important;
-  }
-}
+
