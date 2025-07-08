@@ -32,11 +32,7 @@
 
     <!-- Student Form Section -->
     <div id="studentFormContainer">
-      
       <form id="studentForm">
-        
-
-        <!-- Basic student details form -->
         <h5 class="mb-3 mt-2">📘 Basic Student Details</h5>
         <div class="row">
           <div class="col-md-4 mb-3"><input type="text" id="name" class="form-control" placeholder="Student Name" required /></div>
@@ -56,15 +52,12 @@
           <div class="col-md-12 mb-3"><input type="text" id="address" class="form-control" placeholder="Student Address" required /></div>
         </div>
 
-        <!-- Academic details form -->
         <h5 class="mb-3 mt-2">🎓 Academic Details</h5>
         <div class="row">
           <div class="col-md-4 mb-3"><input type="text" id="class" class="form-control" placeholder="Class/Grade"></div>
           <div class="col-md-4 mb-3"><input type="text" id="section" class="form-control" placeholder="Section"></div>
           <div class="col-md-4 mb-3"><input type="text" id="admissionRoll" class="form-control" placeholder="Roll Number"></div>
-          <div class="col-md-4 mb-3">
-            <input type="text" id="admissionDate" class="form-control" placeholder="Admission Date" onfocus="this.type='date'" onblur="if(this.value=='') this.type='text'">
-          </div>
+          <div class="col-md-4 mb-3"><input type="text" id="admissionDate" class="form-control" placeholder="Admission Date" onfocus="this.type='date'" onblur="if(this.value==='') this.type='text'" /></div>
           <div class="col-md-4 mb-3">
             <select id="status" class="form-select">
               <option value="" disabled selected hidden>Current Status</option>
@@ -76,7 +69,6 @@
           <div class="col-md-4 mb-3"><input type="text" id="prevSchool" class="form-control" placeholder="Previous School"></div>
         </div>
 
-        <!-- parents details form -->
         <h5 class="mb-3 mt-2">👨‍👩‍👧 Parent / Guardian Details</h5>
         <div class="row">
           <div class="col-md-4 mb-3"><input type="text" id="father" class="form-control" placeholder="Father's Name"></div>
@@ -85,16 +77,14 @@
           <div class="col-md-4 mb-3"><input type="text" id="guardianContact" class="form-control" placeholder="Guardian Contact"></div>
         </div>
 
-        <!-- student attendance form -->
         <h5 class="mb-3 mt-2">📊 Attendance & Performance</h5>
         <div class="row">
-          <div class="col-md-4 mb-3"><input type="text" id="attendance" class="form-control" placeholder="Attendance Record (Date-wise)"></div>
-          <div class="col-md-4 mb-3"><input type="text" id="grades" class="form-control" placeholder="Marks/Grades (Subject-wise)"></div>
+          <div class="col-md-4 mb-3"><input type="text" id="attendance" class="form-control" placeholder="Attendance Record"></div>
+          <div class="col-md-4 mb-3"><input type="text" id="grades" class="form-control" placeholder="Marks/Grades"></div>
           <div class="col-md-4 mb-3"><input type="text" id="subjects" class="form-control" placeholder="Subjects Enrolled"></div>
           <div class="col-md-4 mb-3"><input type="text" id="examResults" class="form-control" placeholder="Exam Results / Report Cards"></div>
         </div>
 
-        <!-- Buttons -->
         <div class="text-center">
           <button type="submit" class="btn btn-primary mt-3">Add Student</button>
           <button type="button" id="cancelEditBtn" class="btn btn-secondary mt-3 d-none" onclick="cancelEdit()">Cancel</button>
@@ -102,7 +92,6 @@
       </form>
     </div>
 
-    <!-- Student List / after login-->
     <div id="secureArea" style="display: none;">
       <h4 class="mt-4">📋 Student List</h4>
       <div id="messageBox"></div>

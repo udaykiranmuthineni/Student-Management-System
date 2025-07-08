@@ -5,12 +5,10 @@ const ADMIN_CREDENTIALS = {
 
 let editingId = null;
 
-// Show login modal
 function showLogin() {
   document.getElementById('loginModal').classList.remove('d-none');
 }
 
-// Hide login modal
 function closeLogin() {
   document.getElementById('loginModal').classList.add('d-none');
   document.getElementById('adminUser').value = '';
@@ -18,7 +16,6 @@ function closeLogin() {
   document.getElementById('loginError').textContent = '';
 }
 
-// Handle login
 function login() {
   const user = document.getElementById('adminUser').value.trim();
   const pass = document.getElementById('adminPass').value.trim();
@@ -35,27 +32,38 @@ function login() {
   }
 }
 
-// Handle logout
 function logout() {
   editingId = null;
   document.getElementById('studentForm').reset();
-
   document.getElementById('secureArea').style.display = 'none';
   document.getElementById('studentFormContainer').style.display = 'block';
   document.getElementById('logoutBtn').classList.add('d-none');
   document.getElementById('loginBtn').classList.remove('d-none');
-
   document.querySelector('#studentForm button[type="submit"]').textContent = 'Add Student';
   document.getElementById('cancelEditBtn')?.classList.add('d-none');
 }
 
-// Load students from server
 async function loadStudents() {
   const list = document.getElementById('studentList');
   list.innerHTML = '';
 
-  const res = await fetch('/students');
-  const students = await res.json();
+  let students = [];
+
+  const stored = localStorage.getItem('students');
+  if (stored && stored !== '[]') {
+    students = JSON.parse(stored);
+  } else {
+    try {
+      const res = await fetch('students.json');
+      if (!res.ok) throw new Error("students.json not found");
+      students = await res.json();
+      localStorage.setItem('students', JSON.stringify(students));
+    } catch (err) {
+      console.error("Error loading students.json:", err);
+      list.innerHTML = '<li class="text-danger">❌ Failed to load students.json</li>';
+      return;
+    }
+  }
 
   students.forEach(s => {
     const li = document.createElement('li');
@@ -84,10 +92,8 @@ async function loadStudents() {
   });
 }
 
-// Fill form for editing
 function populateForm(student) {
   editingId = student.id;
-
   document.getElementById('studentFormContainer').style.display = 'block';
   document.getElementById('secureArea').style.display = 'none';
 
@@ -102,7 +108,6 @@ function populateForm(student) {
   showMessage('✏️ Now editing this student', 'warning');
 }
 
-// Cancel editing
 function cancelEdit() {
   editingId = null;
   const form = document.getElementById('studentForm');
@@ -113,81 +118,56 @@ function cancelEdit() {
   document.getElementById('cancelEditBtn')?.classList.add('d-none');
 }
 
-// Show alerts
 function showMessage(msg, type = 'info') {
   const box = document.getElementById('messageBox');
   box.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
   setTimeout(() => (box.innerHTML = ''), 3000);
 }
 
-// Delete student
-async function deleteStudent(id) {
+function deleteStudent(id) {
   if (!confirm('Are you sure you want to delete this student?')) return;
 
-  const res = await fetch(`/students/${id}`, {
-    method: 'DELETE'
-  });
+  let students = JSON.parse(localStorage.getItem('students') || '[]');
+  students = students.filter(s => s.id !== id);
+  localStorage.setItem('students', JSON.stringify(students));
 
-  if (res.ok) {
-    showMessage('🗑️ Student deleted!', 'danger');
-    loadStudents();
-  } else {
-    showMessage('❌ Error deleting student', 'danger');
-  }
+  showMessage('🗑️ Student deleted!', 'danger');
+  loadStudents();
 }
 
-// Handle form submit
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('studentForm');
 
-  form?.addEventListener('submit', async e => {
+  form?.addEventListener('submit', e => {
     e.preventDefault();
 
     const student = {};
     form.querySelectorAll('input, select').forEach(input => {
-      if (input.id) {
-        student[input.id] = input.value.trim();
-      }
+      if (input.id) student[input.id] = input.value.trim();
     });
 
+    let students = JSON.parse(localStorage.getItem('students') || '[]');
+
     if (editingId) {
-      const res = await fetch(`/students/${editingId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(student)
-      });
-
-      if (res.ok) {
-        showMessage('✅ Student updated', 'success');
-        form.reset();
-        editingId = null;
-        document.querySelector('#studentForm button[type="submit"]').textContent = 'Add Student';
-        document.getElementById('cancelEditBtn')?.classList.add('d-none');
-        document.getElementById('studentFormContainer').style.display = 'none';
-        document.getElementById('secureArea').style.display = 'block';
-        loadStudents();
-      } else {
-        showMessage('❌ Failed to update student', 'danger');
-      }
+      const index = students.findIndex(s => s.id === editingId);
+      if (index !== -1) students[index] = student;
+      showMessage('✅ Student updated', 'success');
     } else {
-      const res = await fetch('/students', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(student)
-      });
-
-      const result = await res.json();
-
-      if (res.status === 409) {
+      if (students.find(s => s.id === student.id)) {
         showMessage('⚠️ Student already exists!', 'warning');
-      } else if (res.ok) {
-        showMessage('✅ Student added', 'success');
-        form.reset();
-        loadStudents();
-      } else {
-        showMessage('❌ Failed to add student', 'danger');
+        return;
       }
+      students.push(student);
+      showMessage('✅ Student added', 'success');
     }
+
+    localStorage.setItem('students', JSON.stringify(students));
+    form.reset();
+    editingId = null;
+    document.querySelector('#studentForm button[type="submit"]').textContent = 'Add Student';
+    document.getElementById('cancelEditBtn')?.classList.add('d-none');
+    document.getElementById('studentFormContainer').style.display = 'none';
+    document.getElementById('secureArea').style.display = 'block';
+    loadStudents();
   });
 });
-
