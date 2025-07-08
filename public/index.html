@@ -10,7 +10,7 @@
   <div class="container">
     <!-- Header -->
     <div class="position-relative mb-4">
-      <h2 >Student Management</h2>
+      <h2 class="text-center">Student Management</h2>
       <button id="loginBtn" class="btn btn-outline-success position-absolute end-0 top-0" onclick="showLogin()">Login</button>
       <button id="logoutBtn" class="btn btn-outline-danger position-absolute end-0 top-0 d-none" onclick="logout()">Logout</button>
     </div>
@@ -36,7 +36,6 @@
         <h5 class="mb-3 mt-2">📘 Basic Student Details</h5>
         <div class="row">
           <div class="col-md-4 mb-3"><input type="text" id="name" class="form-control" placeholder="Student Name" required /></div>
-          <div class="col-md-4 mb-3"><input type="text" id="dob" class="form-control" placeholder="Date of Birth" required onfocus="this.type='date'" onblur="if(this.value==='') this.type='text'" /></div>
           <div class="col-md-4 mb-3">
             <select id="sex" class="form-select" required>
               <option value="" disabled selected hidden>Select Gender</option>
@@ -46,6 +45,7 @@
               <option value="Other">Other</option>
             </select>
           </div>
+          <div class="col-md-4 mb-3"><input type="text" id="dob" class="form-control" placeholder="Date of Birth" required onfocus="this.type='date'" onblur="if(this.value==='') this.type='text'" /></div>
           <div class="col-md-4 mb-3"><input type="text" id="id" class="form-control" placeholder="Student ID" required /></div>
           <div class="col-md-4 mb-3"><input type="text" id="no" class="form-control" placeholder="Contact Number" required /></div>
           <div class="col-md-4 mb-3"><input type="email" id="email" class="form-control" placeholder="Student E-Mail" required /></div>
@@ -56,7 +56,11 @@
         <h5 class="mb-3 mt-2">🎓 Academic Details</h5>
         <div class="row">
           <div class="col-md-4 mb-3"><input type="text" id="class" class="form-control" placeholder="Class/Grade"></div>
+          <div class="col-md-4 mb-3"><input type="text" id="section" class="form-control" placeholder="Section"></div>
           <div class="col-md-4 mb-3"><input type="text" id="admissionRoll" class="form-control" placeholder="Roll Number"></div>
+          <div class="col-md-4 mb-3">
+            <input type="text" id="admissionDate" class="form-control" placeholder="Admission Date" onfocus="this.type='date'" onblur="if(this.value=='') this.type='text'">
+          </div>
           <div class="col-md-4 mb-3">
             <select id="status" class="form-select">
               <option value="" disabled selected hidden>Current Status</option>
@@ -65,11 +69,6 @@
               <option value="Dropped">Dropped</option>
             </select>
           </div>
-          <div class="col-md-4 mb-3"><input type="text" id="section" class="form-control" placeholder="Section"></div>
-          <div class="col-md-4 mb-3">
-            <input type="text" id="admissionDate" class="form-control" placeholder="Admission Date" onfocus="this.type='date'" onblur="if(this.value=='') this.type='text'">
-          </div>
-          
           <div class="col-md-4 mb-3"><input type="text" id="prevSchool" class="form-control" placeholder="Previous School"></div>
         </div>
 
